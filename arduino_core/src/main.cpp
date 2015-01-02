@@ -27,8 +27,8 @@ int atexit(void (*func)()) { return 0; }
 void initVariant() __attribute__((weak));
 void initVariant() { }
 
-extern void kaijusetup();
-extern void kaijuloop();
+extern void kaiju_setup();
+extern void kaiju_loop();
 
 int main(void)
 {
@@ -40,10 +40,10 @@ int main(void)
 	USBDevice.attach();
 #endif
 	
-	kaijusetup();
+	kaiju_setup();
     
 	for (;;) {
-		kaijuloop();
+		kaiju_loop();
 		if (serialEventRun) serialEventRun();
 	}
         

@@ -6,3 +6,7 @@ kaiju2014/Release
 # Downloaded library archives
 
 archives/*
+
+# Dolphin etc
+.directory
+
