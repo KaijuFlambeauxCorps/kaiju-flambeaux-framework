@@ -1,0 +1,8 @@
+# Compiled files
+
+arduino_core/328P_16MHz
+kaiju2014/Release
+
+# Downloaded library archives
+
+archives/*
