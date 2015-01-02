@@ -16,10 +16,10 @@ You will need [Eclipse][1], the [Eclipse AVR plugin][2], and the [AVR GCC toolch
 
 ### Importing the projects
 
-1. Clone the git repository into a directory. This can be done via the command line by typing `git clone https://github.com/tullo-x86/kaiju2014.git` (This will create a folder called `kaiju2014` in your working directory)
+1. Clone the git repository into a directory. This can be done via the command line by typing `git clone https://github.com/tullo-x86/kaiju2014.git kfc2014` (This will create a folder called `kfc2014` in your working directory)
 2. In Eclipse, choose *File > Import* from the menu bar
 3. Choose *Existing projects into Workspace* and click Next
-4. Make sure *Select root directory* is selected, click *Browse...*, and navigate to the kaiju2014 directory that git created for you -- **inportant: not the kaiju2014 directory inside that one**
+4. Make sure *Select root directory* is selected, click *Browse...*, and navigate to the kfc2014 directory that git created for you
 5. Verify that two projects are listed and both are checked (you should see `arduino_core` and `kaiju2014`), and click *Finish*
 6. Once that closes, verify that it builds by selecting *Project > Build All* from the menu bar
 
