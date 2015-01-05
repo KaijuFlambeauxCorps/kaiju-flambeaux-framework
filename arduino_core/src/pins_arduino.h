@@ -21,6 +21,7 @@
 
   $Id: wiring.h 249 2007-02-03 16:52:51Z mellis $
 */
+
 #ifndef Pins_Arduino_h
 #define Pins_Arduino_h
 
