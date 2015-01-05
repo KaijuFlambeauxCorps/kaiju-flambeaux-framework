@@ -14,4 +14,5 @@ archives/*
 
 # Dolphin etc
 .directory
+*.swp
 
