@@ -27,9 +27,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Libraries/FastLED3.1</name>
+			<name>Libraries/FastLED</name>
 			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/FastLED3.1</locationURI>
+			<locationURI>ArduinoPivateLibPath/FastLED</locationURI>
 		</link>
 		<link>
 			<name>arduino/core</name>

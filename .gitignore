@@ -1,8 +1,6 @@
 # Compiled files
 
-arduino_core/328P_16MHz
-kaiju2014/Release
-kaiju-2014/Release
+kaiju_2014/Release
 *.hex
 *.elf
 *.o
@@ -15,4 +13,5 @@ archives/*
 # Dolphin etc
 .directory
 *.swp
+*.kate-swp
 

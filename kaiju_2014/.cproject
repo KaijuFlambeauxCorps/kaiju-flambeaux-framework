@@ -21,7 +21,7 @@
 								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.1704112616" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/arduino/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/Libraries/FastLED3.1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/Libraries/FastLED}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.930109374" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
@@ -29,7 +29,7 @@
 								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.210330196" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/arduino/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/Libraries/FastLED3.1}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/kaiju_2014/Libraries/FastLED}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1335582140" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>
@@ -56,4 +56,5 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

@@ -19,7 +19,10 @@ void loop() {
         previousMillis = currentMillis;
 
         if (framebuffer[0].r == 64) {
-            framebuffer[0] = CRGB(0, 64, 64);
+            framebuffer[0] = CRGB(0, 64, 0);
+        }
+        else if (framebuffer[0].g == 64) {
+            framebuffer[0] = CRGB(0, 0, 64);
         }
         else
         {
