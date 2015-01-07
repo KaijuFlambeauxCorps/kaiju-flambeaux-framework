@@ -9,7 +9,7 @@
 #define CONFIG_H_
 
 #define BUFFER_LENGTH 128
-#define NUM_LEDS 5
+#define NUM_LEDS 4
 #define LED_PIN 6
 
 

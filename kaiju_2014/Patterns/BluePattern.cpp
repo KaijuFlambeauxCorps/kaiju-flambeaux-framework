@@ -17,6 +17,6 @@ BluePattern::~BluePattern() {
 }
 
 void BluePattern::draw(CRGB *frameBuffer) {
-	fill_solid(frameBuffer, NUM_LEDS, CRGB(0, 0, 16));
+	fill_gradient_RGB(frameBuffer, NUM_LEDS, CRGB(0, 0, 16), CRGB(16, 16, 16));
 }
 

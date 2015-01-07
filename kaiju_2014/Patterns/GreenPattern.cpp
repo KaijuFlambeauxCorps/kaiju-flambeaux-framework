@@ -17,5 +17,5 @@ GreenPattern::~GreenPattern() {
 }
 
 void GreenPattern::draw(CRGB *frameBuffer) {
-	fill_solid(frameBuffer, NUM_LEDS, CRGB(0, 16, 0));
+	fill_gradient_RGB(frameBuffer, NUM_LEDS, CRGB(16, 16, 0), CRGB(0, 16, 0));
 }
