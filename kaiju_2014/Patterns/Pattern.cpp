@@ -15,4 +15,3 @@ Pattern::Pattern() {
 Pattern::~Pattern() {
 	// TODO Auto-generated destructor stub
 }
-

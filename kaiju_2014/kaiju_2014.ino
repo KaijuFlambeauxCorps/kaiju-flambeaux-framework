@@ -1,40 +1,47 @@
-// Do not remove the include below
+// THIS INCLUDE MUST BE FIRST
 #include "kaiju_2014.h"
+/////////////////////////////
+
+#include "config.h"
 
 #include "FastLED.h"
+
+#include "PatternCycler.h"
 
 #include "Patterns/Pattern.h"
 #include "Patterns/BluePattern.h"
 #include "Patterns/GreenPattern.h"
 
-CRGB framebuffer[4];
+CRGB framebuffer[NUM_LEDS];
 BluePattern blue;
 GreenPattern green;
 
-Pattern *patterns[2] = { &blue, &green };
+PatternCycler cycler;
 
 void setup(){
-    FastLED.addLeds<WS2811, 6, GRB>(framebuffer, 4);
+    FastLED.addLeds<WS2811, LED_PIN, GRB>(framebuffer, NUM_LEDS);
     framebuffer[0] = CRGB(64, 0 , 0);
     FastLED.show();
+
+    cycler.addPattern(&blue);
+    cycler.addPattern(&green);
 }
 
 unsigned long previousMillis = 0;
-unsigned long interval = 1000; // ms
+unsigned long cycleInterval = 1000; // ms
 
 unsigned char currentPattern = 0;
 
 void loop() {
     unsigned long currentMillis = millis();
 
-    if(currentMillis - previousMillis > interval) {
+    if(currentMillis - previousMillis > cycleInterval) {
         previousMillis = currentMillis;
 
-        framebuffer[0] = patterns[currentPattern]->GetColor();
-
-        currentPattern++;
-        currentPattern = currentPattern % 2;
-
-        FastLED.show();
+        cycler.cycleToNext();
     }
+
+    framebuffer[0] = cycler.currentPattern()->GetColor();
+
+    FastLED.show();
 }
