@@ -12,15 +12,17 @@
 #include "Patterns/BluePattern.h"
 #include "Patterns/GreenPattern.h"
 
-CRGB framebuffer[NUM_LEDS];
+CRGB framebuffer[BUFFER_LENGTH];
 BluePattern blue;
 GreenPattern green;
 
 PatternCycler cycler;
 
 void setup(){
-    FastLED.addLeds<WS2811, LED_PIN, GRB>(framebuffer, NUM_LEDS);
-    framebuffer[0] = CRGB(64, 0 , 0);
+    // Set uninitialised LEDs to a faint grey
+    memset8(framebuffer, 1, BUFFER_LENGTH * sizeof(CRGB));
+
+    FastLED.addLeds<WS2811, LED_PIN, GRB>(framebuffer, BUFFER_LENGTH);
     FastLED.show();
 
     cycler.addPattern(&blue);

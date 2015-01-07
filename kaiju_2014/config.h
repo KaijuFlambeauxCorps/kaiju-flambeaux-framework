@@ -8,7 +8,8 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define NUM_LEDS 128
+#define BUFFER_LENGTH 128
+#define NUM_LEDS 5
 #define LED_PIN 6
 
 
