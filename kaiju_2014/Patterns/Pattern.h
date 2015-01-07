@@ -18,6 +18,7 @@ public:
 	Pattern();
 	virtual ~Pattern();
 
+	virtual void update(unsigned int deltaT) = 0;
 	virtual void draw(CRGB *frameBuffer) = 0;
 };
 

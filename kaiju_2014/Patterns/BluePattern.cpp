@@ -7,13 +7,17 @@
 
 #include "../Patterns/BluePattern.h"
 
-BluePattern::BluePattern() {
+BluePattern::BluePattern()
+{
 	// TODO Auto-generated constructor stub
-
 }
 
 BluePattern::~BluePattern() {
 	// TODO Auto-generated destructor stub
+}
+
+void BluePattern::update(unsigned int deltaT) {
+	// This static pattern has no changes over time
 }
 
 void BluePattern::draw(CRGB *frameBuffer) {

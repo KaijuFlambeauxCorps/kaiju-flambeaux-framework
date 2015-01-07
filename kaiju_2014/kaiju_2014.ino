@@ -9,11 +9,13 @@
 #include "Patterns/Pattern.h"
 #include "Patterns/BluePattern.h"
 #include "Patterns/GreenPattern.h"
+#include "Patterns/RainbowFadePattern.h"
 #include "Playlist.h"
 
 CRGB framebuffer[BUFFER_LENGTH];
 BluePattern blue;
 GreenPattern green;
+RainbowFadePattern rainbow;
 
 Playlist playlist;
 
@@ -26,23 +28,31 @@ void setup(){
 
     playlist.addPattern(&blue);
     playlist.addPattern(&green);
+    playlist.addPattern(&rainbow);
 }
 
-unsigned long previousMillis = 0;
-unsigned long cycleInterval = 1000; // ms
-
-unsigned char currentPattern = 0;
+// All times are in milliseconds
+unsigned long lastCycleTime = 0;
+unsigned long lastFrameTime = 0;
+unsigned long currentTime = 0;
+unsigned long cycleInterval = 1000;
 
 void loop() {
-    unsigned long currentMillis = millis();
+	lastFrameTime = currentTime;
+    currentTime = millis();
 
-    if(currentMillis - previousMillis > cycleInterval) {
-        previousMillis = currentMillis;
+    if(currentTime - lastCycleTime > cycleInterval) {
+        lastCycleTime = currentTime;
 
         playlist.cycleToNext();
     }
 
-    playlist.currentPattern()->draw(framebuffer);
+	Pattern* currentPattern = playlist.currentPattern();
+
+	uint16_t timeSinceLastFrame = lastFrameTime - currentTime; // truncate
+
+	currentPattern->update(timeSinceLastFrame);
+	currentPattern->draw(framebuffer);
 
     FastLED.show();
 }
