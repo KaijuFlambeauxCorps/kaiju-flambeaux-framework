@@ -1,19 +1,19 @@
 /*
- * PatternCycler.h
+ * Playlist.h
  *
  *  Created on: 7 Jan 2015
  *      Author: tully
  */
 
-#ifndef PATTERNCYCLER_H_
-#define PATTERNCYCLER_H_
+#ifndef PLAYLIST_H_
+#define PLAYLIST_H_
 
 #include "Patterns/Pattern.h"
 
-class PatternCycler {
+class Playlist {
 public:
-	PatternCycler();
-	virtual ~PatternCycler();
+	Playlist();
+	virtual ~Playlist();
 
 	// Adds a pattern to the collection
 	void addPattern(Pattern *pattern);
@@ -27,4 +27,4 @@ private:
 	unsigned char _patternCount;
 };
 
-#endif /* PATTERNCYCLER_H_ */
+#endif /* PLAYLIST_H_ */

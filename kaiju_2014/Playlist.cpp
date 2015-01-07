@@ -5,9 +5,9 @@
  *      Author: tully
  */
 
-#include "PatternCycler.h"
+#include "Playlist.h"
 
-PatternCycler::PatternCycler()
+Playlist::Playlist()
 : _patterns { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
   _currentPatternIndex(0),
   _patternCount(0)
@@ -16,21 +16,21 @@ PatternCycler::PatternCycler()
 
 }
 
-PatternCycler::~PatternCycler() {
+Playlist::~Playlist() {
 	// TODO Auto-generated destructor stub
 }
 
-void PatternCycler::addPattern(Pattern *pattern) {
+void Playlist::addPattern(Pattern *pattern) {
 	_patterns[_patternCount] = pattern;
 	_patternCount++;
 }
 
-void PatternCycler::cycleToNext() {
+void Playlist::cycleToNext() {
 	// Increment and wrap around
 	_currentPatternIndex++;
 	_currentPatternIndex %= _patternCount;
 }
 
-Pattern *PatternCycler::currentPattern() {
+Pattern *Playlist::currentPattern() {
 	return _patterns[_currentPatternIndex];
 }

@@ -6,17 +6,16 @@
 
 #include "FastLED.h"
 
-#include "PatternCycler.h"
-
 #include "Patterns/Pattern.h"
 #include "Patterns/BluePattern.h"
 #include "Patterns/GreenPattern.h"
+#include "Playlist.h"
 
 CRGB framebuffer[BUFFER_LENGTH];
 BluePattern blue;
 GreenPattern green;
 
-PatternCycler cycler;
+Playlist playlist;
 
 void setup(){
     // Set uninitialised LEDs to a faint grey
@@ -25,8 +24,8 @@ void setup(){
     FastLED.addLeds<WS2811, LED_PIN, GRB>(framebuffer, BUFFER_LENGTH);
     FastLED.show();
 
-    cycler.addPattern(&blue);
-    cycler.addPattern(&green);
+    playlist.addPattern(&blue);
+    playlist.addPattern(&green);
 }
 
 unsigned long previousMillis = 0;
@@ -40,10 +39,10 @@ void loop() {
     if(currentMillis - previousMillis > cycleInterval) {
         previousMillis = currentMillis;
 
-        cycler.cycleToNext();
+        playlist.cycleToNext();
     }
 
-    cycler.currentPattern()->draw(framebuffer);
+    playlist.currentPattern()->draw(framebuffer);
 
     FastLED.show();
 }
