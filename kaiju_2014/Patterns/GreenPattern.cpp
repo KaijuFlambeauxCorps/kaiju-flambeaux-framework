@@ -7,13 +7,17 @@
 
 #include "../Patterns/GreenPattern.h"
 
-GreenPattern::GreenPattern() {
+GreenPattern::GreenPattern()
+{
 	// TODO Auto-generated constructor stub
-
 }
 
 GreenPattern::~GreenPattern() {
 	// TODO Auto-generated destructor stub
+}
+
+void GreenPattern::update(unsigned int deltaT) {
+	// This static pattern has no changes over time
 }
 
 void GreenPattern::draw(CRGB *frameBuffer) {

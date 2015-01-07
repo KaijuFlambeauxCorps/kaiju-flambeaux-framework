@@ -15,6 +15,7 @@ public:
 	GreenPattern();
 	virtual ~GreenPattern();
 
+	virtual void update(unsigned int deltaT);
 	virtual void draw(CRGB *frameBuffer);
 };
 
