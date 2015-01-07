@@ -16,3 +16,6 @@ GreenPattern::~GreenPattern() {
 	// TODO Auto-generated destructor stub
 }
 
+void GreenPattern::draw(CRGB *frameBuffer) {
+	fill_solid(frameBuffer, NUM_LEDS, CRGB(0, 16, 0));
+}

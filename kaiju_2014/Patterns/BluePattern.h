@@ -15,7 +15,7 @@ public:
 	BluePattern();
 	virtual ~BluePattern();
 
-	virtual CRGB GetColor() { return CRGB(0, 0, 64); }
+	virtual void draw(CRGB *frameBuffer);
 };
 
 #endif /* PATTERN_BLUEPATTERN_H_ */

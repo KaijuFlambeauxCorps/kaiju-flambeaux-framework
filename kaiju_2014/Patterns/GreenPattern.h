@@ -15,7 +15,7 @@ public:
 	GreenPattern();
 	virtual ~GreenPattern();
 
-	virtual CRGB GetColor() { return CRGB(0, 64, 0); }
+	virtual void draw(CRGB *frameBuffer);
 };
 
 #endif /* PATTERN_GREENPATTERN_H_ */

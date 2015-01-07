@@ -41,7 +41,7 @@ void loop() {
         cycler.cycleToNext();
     }
 
-    framebuffer[0] = cycler.currentPattern()->GetColor();
+    cycler.currentPattern()->draw(framebuffer);
 
     FastLED.show();
 }
