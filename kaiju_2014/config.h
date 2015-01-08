@@ -12,5 +12,4 @@
 #define NUM_LEDS 4
 #define LED_PIN 6
 
-
 #endif /* CONFIG_H_ */

@@ -9,21 +9,18 @@
 #include "Arduino.h"
 //add your includes for the project kaiju_2014 here
 
-
 //end of add your includes here
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
-void loop();
-void setup();
+    void loop();
+    void setup();
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
 //add your function definitions for the project kaiju_2014 here
-
-
-
 
 //Do not add code below this line
 #endif /* _kaiju_2014_H_ */

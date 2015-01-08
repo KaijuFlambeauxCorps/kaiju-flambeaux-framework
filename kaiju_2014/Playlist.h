@@ -10,21 +10,22 @@
 
 #include "Patterns/Pattern.h"
 
-class Playlist {
+class Playlist
+{
 public:
-	Playlist();
-	virtual ~Playlist();
+    Playlist();
+    virtual ~Playlist();
 
-	// Adds a pattern to the collection
-	void addPattern(Pattern *pattern);
-	void cycleToNext();
+    // Adds a pattern to the collection
+    void addPattern(Pattern *pattern);
+    void cycleToNext();
 
-	Pattern* currentPattern();
+    Pattern* currentPattern();
 
 private:
-	Pattern *_patterns[10];
-	unsigned char _currentPatternIndex;
-	unsigned char _patternCount;
+    Pattern *_patterns[10];
+    unsigned char _currentPatternIndex;
+    unsigned char _patternCount;
 };
 
 #endif /* PLAYLIST_H_ */

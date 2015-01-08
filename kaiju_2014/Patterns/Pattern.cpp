@@ -7,11 +7,13 @@
 
 #include "../Patterns/Pattern.h"
 
-Pattern::Pattern() {
-	// TODO Auto-generated constructor stub
+Pattern::Pattern()
+{
+    // TODO Auto-generated constructor stub
 
 }
 
-Pattern::~Pattern() {
-	// TODO Auto-generated destructor stub
+Pattern::~Pattern()
+{
+    // TODO Auto-generated destructor stub
 }

@@ -19,7 +19,8 @@ RainbowFadePattern rainbow;
 
 Playlist playlist;
 
-void setup(){
+void setup()
+{
     // Set uninitialised LEDs to a faint grey
     memset8(frameBuffer, 1, BUFFER_LENGTH * sizeof(CRGB));
 
@@ -37,22 +38,23 @@ unsigned long lastFrameTime = 0;
 unsigned long currentTime = 0;
 unsigned long cycleInterval = 1000;
 
-void loop() {
-	lastFrameTime = currentTime;
+void loop()
+{
+    lastFrameTime = currentTime;
     currentTime = millis();
 
-    if(currentTime - lastCycleTime > cycleInterval) {
+    if (currentTime - lastCycleTime > cycleInterval) {
         lastCycleTime = currentTime;
 
         playlist.cycleToNext();
     }
 
-	Pattern* currentPattern = playlist.currentPattern();
+    Pattern* currentPattern = playlist.currentPattern();
 
-	uint16_t timeSinceLastFrame = lastFrameTime - currentTime; // truncate
+    uint16_t timeSinceLastFrame = lastFrameTime - currentTime; // truncate
 
-	currentPattern->update(timeSinceLastFrame);
-	currentPattern->draw(frameBuffer);
+    currentPattern->update(timeSinceLastFrame);
+    currentPattern->draw(frameBuffer);
 
     FastLED.show();
 }
