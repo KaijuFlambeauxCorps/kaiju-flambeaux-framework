@@ -37,11 +37,11 @@ SparksPattern::SparksPattern(CRGB *rgbBuffer,
 	unsigned char valFalloffDistance,
     unsigned char valMin,
     unsigned char valMax,
-    unsigned char framesBetweenSparks,
+    unsigned char sparkDistance,
     unsigned char startOffset)
 : _length(length),
 _framesUntilNewSpark(startOffset),
-_framesBetweenSparks(framesBetweenSparks),
+_sparkDistance(sparkDistance),
 _sparkleTrailLength(sparkleTrailLength),
 _valFalloffDistance(valFalloffDistance),
 _valMin(valMin),
@@ -50,8 +50,8 @@ _sparkCount(1)
 {
 	_buffer.rgb = rgbBuffer;
 
-    _maxSparks = length / framesBetweenSparks + 2;
-    if (length % framesBetweenSparks == 0) _maxSparks--;
+    _maxSparks = length / sparkDistance + 2;
+    if (length % sparkDistance == 0) _maxSparks--;
 
     _sparks = new Spark[_maxSparks];
     _sparks[0] = Spark(0, length - 1);
@@ -59,17 +59,19 @@ _sparkCount(1)
 
 void SparksPattern::update(unsigned int deltaT)
 {
+	// First, advance all sparks
 	for (int i = 0; i < _sparkCount; i++)
-        _sparks[i].Position++;
+        _sparks[i].position++;
 
-    // Can only destroy a spark if:
+	// Next, prune a spark if we are able.
+    // We can only destroy a spark if:
     //   - There are at least two sparks
     //  && Spark before it has reached the end
     if (_sparkCount > 1)
     {
     	Spark &secondToLast = _sparks[_sparkCount - 2];
 
-        if (secondToLast.Position >= (_length - 1))
+        if (secondToLast.position >= (_length - 1))
         {
         	_sparkCount--;
         }
@@ -77,26 +79,26 @@ void SparksPattern::update(unsigned int deltaT)
 
     if (--_framesUntilNewSpark == 0)
     {
-        _framesUntilNewSpark = _framesBetweenSparks;
+        _framesUntilNewSpark = _sparkDistance;
 
-        PushSparkToFront(PickHue());
+        pushSparkToFront(pickHue());
     }
 }
 
-unsigned char SparksPattern::PickHue()
+unsigned char SparksPattern::pickHue()
 {
     return rand() % HUE_MAX_RAINBOW;
 }
 
-void SparksPattern::PushSparkToFront(unsigned char hue)
+void SparksPattern::pushSparkToFront(unsigned char hue)
 {
 	for (int i = _maxSparks - 2; i >= 0; i--)
 	{
 		_sparks[i + 1] = _sparks[i];
 	}
 
-	_sparks[0].Position = 0;
-	_sparks[0].Hue = hue;
+	_sparks[0].position = 0;
+	_sparks[0].hue = hue;
 	_sparkCount++;
 }
 
@@ -106,7 +108,7 @@ inline int interpolate(int a, int b, int t, int range_t) {
            (b*(range_t - t) / range_t);
 }
 
-unsigned char SparksPattern::PixelVal(unsigned char leadingSparkPosition, unsigned char pixelPosition)
+unsigned char SparksPattern::pixelVal(unsigned char leadingSparkPosition, unsigned char pixelPosition)
 {
 	unsigned char distance = leadingSparkPosition - pixelPosition;
     if (distance > _valFalloffDistance)
@@ -120,16 +122,15 @@ void SparksPattern::draw(CRGB *frameBuffer)
 {
     int lastSparkHead = -1;
 
-    // Iterate forward from pixel 0 to pixel n
+    // Iterate forward through the sparks
     for (int i = 0; i < _sparkCount; i++)
-    //for(Spark &spark : _sparks)
     {
     	Spark &spark = _sparks[i];
         // - Find the position of this spark
-        int startIdx = spark.Position;
+        int startIdx = spark.position;
 
         // - If the spark is beyond the end, we still need to draw its body and tail
-        //   (but obviously we can't render anything beyond the framebuffer)
+        //   (we just can't render its head, or anything beyond the framebuffer)
         if (startIdx >= _length)
         {
             startIdx = _length - 1;
@@ -141,17 +142,17 @@ void SparksPattern::draw(CRGB *frameBuffer)
             CHSV &pixel = _buffer.hsv[pixelIdx];
 
             //   - Set pixel hue to curent spark's hue
-            pixel.hue = spark.Hue;
+            pixel.hue = spark.hue;
 
             //   - Set pixel saturation:
             //     - (HEAD) 0
             //     - (BODY) random
             //     - (TAIL) 255
-            if (pixelIdx == spark.Position)
+            if (pixelIdx == spark.position)
             {
                 pixel.sat = 0;
             }
-            else if (spark.Position - pixelIdx <= _sparkleTrailLength)
+            else if (spark.position - pixelIdx <= _sparkleTrailLength)
             {
                 // Saturation = 100% - RandomElement({ 0xff, 0x7f, 0x3f, 0x1f, 0x0f })
                 //    leaving possible sat values of { 0x00, 0x70, 0xc0, 0xe0, 0xf0 }
@@ -163,10 +164,11 @@ void SparksPattern::draw(CRGB *frameBuffer)
                 pixel.sat = 255;
             }
 
-            pixel.val = PixelVal(spark.Position, pixelIdx);
+            // Set pixel value based on the falloff function
+            pixel.val = pixelVal(spark.position, pixelIdx);
         }
 
-        lastSparkHead = spark.Position;
+        lastSparkHead = spark.position;
     }
 
     hsv2rgb_rainbow(_buffer.hsv, _buffer.rgb, _length);
