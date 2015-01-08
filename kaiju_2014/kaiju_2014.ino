@@ -12,7 +12,7 @@
 #include "Patterns/RainbowFadePattern.h"
 #include "Playlist.h"
 
-CRGB framebuffer[BUFFER_LENGTH];
+CRGB frameBuffer[BUFFER_LENGTH];
 BluePattern blue;
 GreenPattern green;
 RainbowFadePattern rainbow;
@@ -21,9 +21,9 @@ Playlist playlist;
 
 void setup(){
     // Set uninitialised LEDs to a faint grey
-    memset8(framebuffer, 1, BUFFER_LENGTH * sizeof(CRGB));
+    memset8(frameBuffer, 1, BUFFER_LENGTH * sizeof(CRGB));
 
-    FastLED.addLeds<WS2811, LED_PIN, GRB>(framebuffer, BUFFER_LENGTH);
+    FastLED.addLeds<WS2811, LED_PIN, GRB>(frameBuffer, BUFFER_LENGTH);
     FastLED.show();
 
     playlist.addPattern(&blue);
@@ -52,7 +52,7 @@ void loop() {
 	uint16_t timeSinceLastFrame = lastFrameTime - currentTime; // truncate
 
 	currentPattern->update(timeSinceLastFrame);
-	currentPattern->draw(framebuffer);
+	currentPattern->draw(frameBuffer);
 
     FastLED.show();
 }
