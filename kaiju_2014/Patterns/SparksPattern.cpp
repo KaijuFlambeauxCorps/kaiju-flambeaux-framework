@@ -33,6 +33,7 @@
 
 SparksPattern::SparksPattern(CRGB *rgbBuffer,
 	unsigned char length,
+	int framesPerSecond,
 	unsigned char sparkleTrailLength,
 	unsigned char valFalloffDistance,
     unsigned char valMin,
@@ -40,6 +41,8 @@ SparksPattern::SparksPattern(CRGB *rgbBuffer,
     unsigned char sparkDistance,
     unsigned char startOffset)
 : _length(length),
+_timeBetweenFrames(1000 / framesPerSecond),
+_timeUntilNextFrame(0),
 _framesUntilNewSpark(startOffset),
 _sparkDistance(sparkDistance),
 _sparkleTrailLength(sparkleTrailLength),
@@ -59,30 +62,34 @@ _sparkCount(1)
 
 void SparksPattern::update(unsigned int deltaT)
 {
+	_timeUntilNextFrame -= deltaT;
+	if (_timeUntilNextFrame <= 0) {
+		_timeUntilNextFrame += _timeBetweenFrames;
+
+		advanceSparks();
+	}
+}
+
+void SparksPattern::advanceSparks() {
 	// First, advance all sparks
 	for (int i = 0; i < _sparkCount; i++)
-        _sparks[i].position++;
+		_sparks[i].position++;
 
 	// Next, prune a spark if we are able.
-    // We can only destroy a spark if:
-    //   - There are at least two sparks
-    //  && Spark before it has reached the end
-    if (_sparkCount > 1)
-    {
-    	Spark &secondToLast = _sparks[_sparkCount - 2];
+	// We can only destroy a spark if:
+	//   - There are at least two sparks
+	//  && Spark before it has reached the end
+	if (_sparkCount > 1) {
+		Spark& secondToLast = _sparks[_sparkCount - 2];
+		if (secondToLast.position >= (_length - 1)) {
+			_sparkCount--;
+		}
+	}
 
-        if (secondToLast.position >= (_length - 1))
-        {
-        	_sparkCount--;
-        }
-    }
-
-    if (--_framesUntilNewSpark == 0)
-    {
-        _framesUntilNewSpark = _sparkDistance;
-
-        pushSparkToFront(pickHue());
-    }
+	if (--_framesUntilNewSpark == 0) {
+		_framesUntilNewSpark = _sparkDistance;
+		pushSparkToFront(pickHue());
+	}
 }
 
 unsigned char SparksPattern::pickHue()

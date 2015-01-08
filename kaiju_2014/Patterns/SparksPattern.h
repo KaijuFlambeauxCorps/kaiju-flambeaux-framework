@@ -41,6 +41,7 @@ class SparksPattern : public Pattern
 public:
     SparksPattern(CRGB *rgbBuffer,
 				  unsigned char length,
+				  int framesPerSecond,
 				  unsigned char sparkleTrailLength,
                   unsigned char valFalloffDistance,
                   unsigned char valMin,
@@ -59,6 +60,9 @@ private:
     unsigned char _length;
     unsigned char _framesUntilNewSpark;
 
+    int _timeUntilNextFrame;
+    const int _timeBetweenFrames;
+
     const unsigned char _sparkDistance;
     const unsigned char _sparkleTrailLength;
     const unsigned char _valFalloffDistance;
@@ -73,6 +77,7 @@ private:
 
     unsigned char pixelVal(unsigned char leadingSparkPosition, unsigned char pixelPosition);
     void pushSparkToFront(unsigned char hue);
+	void advanceSparks();
 };
 
 struct Spark
