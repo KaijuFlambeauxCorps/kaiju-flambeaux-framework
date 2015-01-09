@@ -17,7 +17,7 @@ CRGB frameBuffer[BUFFER_LENGTH];
 BluePattern blue;
 GreenPattern green;
 RainbowFadePattern rainbow;
-SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 4, 10, 64, 255, 16);
+SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 4, 10, 32, 96, 16);
 
 Playlist playlist;
 
