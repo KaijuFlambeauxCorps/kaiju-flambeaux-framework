@@ -31,18 +31,19 @@
 
 struct Spark;
 
-union CombinedBuffer {
-	CHSV *hsv;
-	CRGB *rgb;
+union CombinedBuffer
+{
+    CHSV *hsv;
+    CRGB *rgb;
 };
 
-class SparksPattern : public Pattern
+class SparksPattern: public Pattern
 {
 public:
     SparksPattern(CRGB *rgbBuffer,
-				  unsigned char length,
-				  int framesPerSecond,
-				  unsigned char sparkleTrailLength,
+                  unsigned char length,
+                  int framesPerSecond,
+                  unsigned char sparkleTrailLength,
                   unsigned char valFalloffDistance,
                   unsigned char valMin,
                   unsigned char valMax,
@@ -50,8 +51,8 @@ public:
                   unsigned char startOffset = 1);
     virtual ~SparksPattern();
 
-	virtual void update(unsigned int deltaT);
-	virtual void draw(CRGB *frameBuffer);
+    virtual void update(unsigned int deltaT);
+    virtual void draw(CRGB *frameBuffer);
 
 protected:
     virtual unsigned char pickHue();
@@ -75,16 +76,29 @@ private:
 
     CombinedBuffer _buffer;
 
-    unsigned char pixelVal(unsigned char leadingSparkPosition, unsigned char pixelPosition);
+    unsigned char pixelVal(unsigned char leadingSparkPosition,
+                           unsigned char pixelPosition);
     void pushSparkToFront(unsigned char hue);
-	void advanceSparks();
+    void advanceSparks();
 };
 
 struct Spark
 {
-	Spark() : hue(0), position(0) { }
-	Spark(const Spark &rhs) { hue = rhs.hue; position = rhs.position; }
-    Spark(unsigned char h, unsigned char position = 0) : hue(h), position(position) { }
+    Spark()
+            : hue(0),
+              position(0)
+    {
+    }
+    Spark(const Spark &rhs)
+    {
+        hue = rhs.hue;
+        position = rhs.position;
+    }
+    Spark(unsigned char h, unsigned char position = 0)
+            : hue(h),
+              position(position)
+    {
+    }
     unsigned char hue;
     unsigned char position;
 };

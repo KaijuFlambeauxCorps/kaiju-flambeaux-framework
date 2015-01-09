@@ -13,13 +13,14 @@
 #include "pixeltypes.h"
 #include "colorutils.h"
 
-class Pattern {
+class Pattern
+{
 public:
-	Pattern();
-	virtual ~Pattern();
+    Pattern();
+    virtual ~Pattern();
 
-	virtual void update(unsigned int deltaT) = 0;
-	virtual void draw(CRGB *frameBuffer) = 0;
+    virtual void update(unsigned int deltaT) = 0;
+    virtual void draw(CRGB *frameBuffer) = 0;
 };
 
 #endif /* PATTERN_PATTERN_H_ */

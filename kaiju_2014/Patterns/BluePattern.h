@@ -10,13 +10,14 @@
 
 #include "../Patterns/Pattern.h"
 
-class BluePattern: public Pattern {
+class BluePattern: public Pattern
+{
 public:
-	BluePattern();
-	virtual ~BluePattern();
+    BluePattern();
+    virtual ~BluePattern();
 
-	virtual void update(unsigned int deltaT);
-	virtual void draw(CRGB *frameBuffer);
+    virtual void update(unsigned int deltaT);
+    virtual void draw(CRGB *frameBuffer);
 };
 
 #endif /* PATTERN_BLUEPATTERN_H_ */

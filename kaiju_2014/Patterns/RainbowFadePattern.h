@@ -10,15 +10,16 @@
 
 #include "Pattern.h"
 
-class RainbowFadePattern: public Pattern {
+class RainbowFadePattern: public Pattern
+{
 public:
-	virtual ~RainbowFadePattern();
-	RainbowFadePattern();
+    virtual ~RainbowFadePattern();
+    RainbowFadePattern();
 
-	virtual void update(unsigned int deltaT);
-	virtual void draw(CRGB *frameBuffer);
+    virtual void update(unsigned int deltaT);
+    virtual void draw(CRGB *frameBuffer);
 private:
-	unsigned int _time;
+    unsigned int _time;
 };
 
 #endif /* RAINBOWFADEPATTERN_H_ */
