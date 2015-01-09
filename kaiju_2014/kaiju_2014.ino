@@ -54,7 +54,7 @@ void loop()
 
     Pattern* currentPattern = playlist.currentPattern();
 
-    uint16_t timeSinceLastFrame = lastFrameTime - currentTime; // truncate
+    uint16_t timeSinceLastFrame = currentTime - lastFrameTime; // truncate
 
     currentPattern->update(timeSinceLastFrame);
     currentPattern->draw(frameBuffer);
