@@ -10,12 +10,14 @@
 #include "Patterns/BluePattern.h"
 #include "Patterns/GreenPattern.h"
 #include "Patterns/RainbowFadePattern.h"
+#include "Patterns/SparksPattern.h"
 #include "Playlist.h"
 
 CRGB frameBuffer[BUFFER_LENGTH];
 BluePattern blue;
 GreenPattern green;
 RainbowFadePattern rainbow;
+SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 4, 10, 32, 96, 16);
 
 Playlist playlist;
 
@@ -30,6 +32,7 @@ void setup()
     playlist.addPattern(&blue);
     playlist.addPattern(&green);
     playlist.addPattern(&rainbow);
+    playlist.addPattern(&sparks);
 }
 
 // All times are in milliseconds
