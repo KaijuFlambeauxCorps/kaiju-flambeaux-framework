@@ -19,8 +19,14 @@ public:
     // Adds a pattern to the collection
     void addPattern(Pattern *pattern);
     void cycleToNext();
+    void goToPattern(unsigned char patternIndex);
 
     Pattern* currentPattern();
+
+    unsigned char getCurrentPatternIndex() const
+    {
+        return _currentPatternIndex;
+    }
 
 private:
     Pattern *_patterns[10];

@@ -16,6 +16,8 @@
 #include "RadioHead.h"
 #include "RH_RF69.h"
 
+#include "RadioMessage.h"
+
 // Encryption key must be 16 bytes
 const char * const encryptionKey PROGMEM = "KyjuFlamboCore!"; // C string includes null-terminator, making this 16 bytes
 
@@ -29,7 +31,6 @@ Playlist playlist;
 
 RH_RF69 radio;
 const float RadioFrequency = 915.0;
-
 bool isTransmitter;
 
 void initializeRadio()
@@ -60,6 +61,10 @@ void initializeRadio()
     else {
         Serial.println("This module will receive.");
     }
+
+    Serial.print("Radio messages will be ");
+    Serial.print(sizeof(RadioMessage));
+    Serial.println(" bytes in length.");
 }
 
 void initializeLeds()
@@ -89,23 +94,53 @@ unsigned long lastFrameTime = 0;
 unsigned long currentTime = 0;
 const unsigned long cycleInterval = 1000;
 
-void loop()
-{
-    lastFrameTime = currentTime;
-    currentTime = millis();
+uint8_t const radioBuffer[sizeof(RadioMessage)] = { };
+RadioMessage *message = reinterpret_cast<RadioMessage*>(const_cast<uint8_t*>(radioBuffer));
 
+void transmitLoop()
+{
     if (currentTime - lastCycleTime > cycleInterval) {
         lastCycleTime = currentTime;
 
         playlist.cycleToNext();
+
+        message->messageType = MessageType::SetPattern;
+        message->payload = playlist.getCurrentPatternIndex();
+
+        Serial.print("Sending radio message...");
+        radio.send(radioBuffer, (unsigned char)sizeof(RadioMessage));
+        radio.waitPacketSent();
+        Serial.println(" Done.");
     }
+}
 
+void receiveLoop()
+{
+
+}
+
+void render()
+{
     Pattern* currentPattern = playlist.currentPattern();
-
     uint16_t timeSinceLastFrame = currentTime - lastFrameTime; // truncate
 
     currentPattern->update(timeSinceLastFrame);
     currentPattern->draw(frameBuffer);
 
     FastLED.show();
+}
+
+void loop()
+{
+    lastFrameTime = currentTime;
+    currentTime = millis();
+
+    if (isTransmitter) {
+        transmitLoop();
+    }
+    else {
+        receiveLoop();
+    }
+
+    render();
 }
