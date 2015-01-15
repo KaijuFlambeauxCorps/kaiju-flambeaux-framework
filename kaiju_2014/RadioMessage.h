@@ -16,6 +16,9 @@ namespace MessageType
     };
 }
 
+// Forward-declare for inner reference
+union RadioMessage;
+
 union RadioMessage
 {
     struct
@@ -25,6 +28,8 @@ union RadioMessage
     };
 
     uint8_t raw[sizeof(MessageType::Enum) + sizeof(uint8_t)];
+
+    static size_t Size() { return sizeof(RadioMessage); }
 };
 
 #endif /* RADIOMESSAGE_H_ */

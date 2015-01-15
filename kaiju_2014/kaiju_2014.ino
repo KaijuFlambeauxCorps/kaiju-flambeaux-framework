@@ -63,7 +63,7 @@ void initializeRadio()
     }
 
     Serial.print("Radio messages will be ");
-    Serial.print(sizeof(RadioMessage));
+    Serial.print(RadioMessage::Size());
     Serial.println(" bytes in length.");
 }
 
@@ -94,8 +94,10 @@ unsigned long lastFrameTime = 0;
 unsigned long currentTime = 0;
 const unsigned long cycleInterval = 1000;
 
-uint8_t const radioBuffer[sizeof(RadioMessage)] = { };
-RadioMessage *message = reinterpret_cast<RadioMessage*>(const_cast<uint8_t*>(radioBuffer));
+uint8_t const txBuffer[sizeof(RadioMessage)] = { };
+uint8_t *rxBuffer = const_cast<uint8_t*>(txBuffer);
+uint8_t incomingPacketLength;
+RadioMessage *message = reinterpret_cast<RadioMessage*>(const_cast<uint8_t*>(txBuffer));
 
 void transmitLoop()
 {
@@ -108,7 +110,7 @@ void transmitLoop()
         message->payload = playlist.getCurrentPatternIndex();
 
         Serial.print("Sending radio message...");
-        radio.send(radioBuffer, (unsigned char)sizeof(RadioMessage));
+        radio.send(txBuffer, RadioMessage::Size());
         radio.waitPacketSent();
         Serial.println(" Done.");
     }
@@ -116,7 +118,22 @@ void transmitLoop()
 
 void receiveLoop()
 {
+    if (radio.available()) {
+        Serial.println("\r\nRadio message available! ");
 
+        // Set maximum receive size (will be overwritten with actual received packet length)
+        incomingPacketLength = RadioMessage::Size();
+
+        if (radio.recv(rxBuffer, &incomingPacketLength)) {
+            Serial.print("Message type: ");
+            Serial.print(message->messageType);
+            Serial.print(", payload: ");
+            Serial.println(message->payload);
+        }
+        else {
+            Serial.println("recv() failed. How?");
+        }
+    }
 }
 
 void render()
