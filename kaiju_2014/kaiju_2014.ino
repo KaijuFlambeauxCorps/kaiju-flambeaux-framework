@@ -17,7 +17,7 @@ CRGB frameBuffer[BUFFER_LENGTH];
 BluePattern blue;
 GreenPattern green;
 RainbowFadePattern rainbow;
-SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 4, 10, 32, 96, 16);
+SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 255, 20);
 
 Playlist playlist;
 
@@ -39,7 +39,7 @@ void setup()
 unsigned long lastCycleTime = 0;
 unsigned long lastFrameTime = 0;
 unsigned long currentTime = 0;
-unsigned long cycleInterval = 1000;
+unsigned long cycleInterval = 10000;
 
 void loop()
 {
