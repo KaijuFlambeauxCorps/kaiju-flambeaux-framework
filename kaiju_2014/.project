@@ -42,18 +42,4 @@
 			<locationURI>ArduinoPinPath/standard</locationURI>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>ArduinoHardwareLibPath</name>
-			<value>file:/home/tully/.local/Apps/arduino-1.5.8/hardware/arduino/avr/libraries</value>
-		</variable>
-		<variable>
-			<name>ArduinoPinPath</name>
-			<value>file:/home/tully/.local/Apps/arduino-1.5.8/hardware/arduino/avr/variants</value>
-		</variable>
-		<variable>
-			<name>ArduinoPlatformPath</name>
-			<value>file:/home/tully/.local/Apps/arduino-1.5.8/hardware/arduino/avr</value>
-		</variable>
-	</variableList>
 </projectDescription>

@@ -1,5 +1,6 @@
 # Compiled files
 
+kaiju_2014/.settings
 kaiju_2014/Release
 *.hex
 *.elf
