@@ -59,10 +59,12 @@ void initializeRadio()
 
 void initializeLeds()
 {
+    pinMode(LED_INDICATOR_PIN, OUTPUT);
+
     // Set uninitialised LEDs to a faint grey
     memset8(frameBuffer, 1, BUFFER_LENGTH * sizeof(CRGB));
 
-    FastLED.addLeds<WS2811, LED_PIN, GRB>(frameBuffer, BUFFER_LENGTH);
+    FastLED.addLeds<WS2811, LED_DATA_PIN, GRB>(frameBuffer, BUFFER_LENGTH);
     FastLED.show();
 
     playlist.addPattern(&blue);
@@ -99,7 +101,9 @@ void transmitLoop()
         message->messageType = MessageType::SetPattern;
         message->payload = playlist.getCurrentPatternIndex();
 
-        Serial.print("Sending radio message...");
+        Serial.print("Instructing other units to change to pattern ");
+        Serial.print(message->payload);
+        Serial.print("...");
         radio.send(txBuffer, RadioMessage::Size());
         radio.waitPacketSent();
         Serial.println(" Done.");
@@ -110,7 +114,10 @@ void transmitLoop()
 
 void receiveLoop()
 {
+    digitalWrite(LED_INDICATOR_PIN, LOW);
+
     if (radio.available()) {
+        digitalWrite(LED_INDICATOR_PIN, HIGH);
         Serial.println("\r\nRadio message available! ");
 
         // Set maximum receive size (will be overwritten with actual received packet length)
@@ -121,9 +128,6 @@ void receiveLoop()
             Serial.print(message->messageType);
             Serial.print(", payload: ");
             Serial.println(message->payload);
-        }
-        else {
-            Serial.println("recv() failed. How?");
         }
     }
 }
