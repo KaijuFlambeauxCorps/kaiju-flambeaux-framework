@@ -38,3 +38,15 @@ Pattern *Playlist::currentPattern()
 {
     return _patterns[_currentPatternIndex];
 }
+
+void Playlist::goToPattern(unsigned char patternIndex)
+{
+    // Bad transmision? Just change to anything.
+    if (patternIndex >= _patternCount)  {
+        cycleToNext();
+    }
+    else {
+        _currentPatternIndex = patternIndex;
+    }
+
+}
