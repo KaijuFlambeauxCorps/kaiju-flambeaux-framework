@@ -50,17 +50,7 @@ void initializeRadio()
     radio.setEncryptionKey((unsigned char*) (encryptionKey));
 
     Serial.println("Initialising pins... ");
-    pinMode(3, INPUT_PULLUP);
-    pinMode(4, OUTPUT);
-    digitalWrite(4, LOW);
-
-    isTransmitter = (digitalRead(3) == LOW);
-    if (isTransmitter) {
-        Serial.println("This module will transmit.");
-    }
-    else {
-        Serial.println("This module will receive.");
-    }
+    pinMode(INPUT_PIN, INPUT_PULLUP);
 
     Serial.print("Radio messages will be ");
     Serial.print(RadioMessage::Size());
@@ -89,21 +79,21 @@ void setup()
 }
 
 // All times are in milliseconds
-unsigned long lastCycleTime = 0;
 unsigned long lastFrameTime = 0;
 unsigned long currentTime = 0;
-const unsigned long cycleInterval = 10000;
 
 uint8_t const txBuffer[sizeof(RadioMessage)] = { };
 uint8_t *rxBuffer = const_cast<uint8_t*>(txBuffer);
 uint8_t incomingPacketLength;
 RadioMessage *message = reinterpret_cast<RadioMessage*>(const_cast<uint8_t*>(txBuffer));
 
+bool isButtonHeld = false;
+
 void transmitLoop()
 {
-    if (currentTime - lastCycleTime > cycleInterval) {
-        lastCycleTime = currentTime;
+    bool isButtonDown = (digitalRead(INPUT_PIN) == LOW);
 
+    if (isButtonDown && !isButtonHeld) {
         playlist.cycleToNext();
 
         message->messageType = MessageType::SetPattern;
@@ -114,6 +104,8 @@ void transmitLoop()
         radio.waitPacketSent();
         Serial.println(" Done.");
     }
+
+    isButtonHeld = isButtonDown;
 }
 
 void receiveLoop()
@@ -152,12 +144,8 @@ void loop()
     lastFrameTime = currentTime;
     currentTime = millis();
 
-    if (isTransmitter) {
-        transmitLoop();
-    }
-    else {
-        receiveLoop();
-    }
+    transmitLoop();
+    receiveLoop();
 
     render();
 }
