@@ -42,7 +42,7 @@ void initializeRadio()
     Serial.print("Setting radio frequency to ");
     Serial.print(RadioFrequency);
     Serial.println("MHz...");
-    radio.setFrequency(915.0);
+    radio.setFrequency(RadioFrequency);
 
     Serial.print("Setting radio encryption key to \"");
     Serial.print(encryptionKey);
