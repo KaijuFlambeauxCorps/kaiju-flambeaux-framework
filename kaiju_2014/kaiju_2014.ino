@@ -49,6 +49,9 @@ void initializeRadio()
     Serial.println("\"...");
     radio.setEncryptionKey((unsigned char*) (encryptionKey));
 
+    Serial.println("Setting modem config...");
+    radio.setModemConfig(RH_RF69::GFSK_Rb19_2Fd38_4);
+
     Serial.println("Initialising pins... ");
     pinMode(INPUT_PIN, INPUT_PULLUP);
 
@@ -128,6 +131,8 @@ void receiveLoop()
             Serial.print(message->messageType);
             Serial.print(", payload: ");
             Serial.println(message->payload);
+
+            playlist.goToPattern(message->payload);
         }
     }
 }
