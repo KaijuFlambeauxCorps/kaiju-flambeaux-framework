@@ -32,6 +32,7 @@ void Playlist::cycleToNext()
     // Increment and wrap around
     _currentPatternIndex++;
     _currentPatternIndex %= _patternCount;
+    currentPattern()->reset();
 }
 
 Pattern *Playlist::currentPattern()
@@ -48,5 +49,5 @@ void Playlist::goToPattern(unsigned char patternIndex)
     else {
         _currentPatternIndex = patternIndex;
     }
-
+    currentPattern()->reset();
 }

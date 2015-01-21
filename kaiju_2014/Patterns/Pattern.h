@@ -21,6 +21,7 @@ public:
 
     virtual void update(unsigned int deltaT) = 0;
     virtual void draw(CRGB *frameBuffer) = 0;
+    virtual void reset() { };
 };
 
 #endif /* PATTERN_PATTERN_H_ */
