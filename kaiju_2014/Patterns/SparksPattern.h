@@ -27,6 +27,8 @@
 #ifndef PATTERN_SPARKSPATTERN_H_
 #define PATTERN_SPARKSPATTERN_H_
 
+#define MAX_SPARKS 12
+
 #include "../Patterns/Pattern.h"
 
 struct Spark;
@@ -70,9 +72,8 @@ private:
     const unsigned char _valMin;
     const unsigned char _valMax;
 
-    Spark *_sparks;
+    static Spark _sparks[MAX_SPARKS];
     unsigned char _sparkCount;
-    unsigned char _maxSparks;
 
     CombinedBuffer _buffer;
 
