@@ -7,6 +7,7 @@
 #include "FastLED.h"
 
 #include "Patterns/Pattern.h"
+#include "Patterns/PulsingSaturationPattern.h"
 #include "Patterns/BluePattern.h"
 #include "Patterns/GreenPattern.h"
 #include "Patterns/RainbowFadePattern.h"
@@ -22,6 +23,7 @@
 const char * const encryptionKey PROGMEM = "KyjuFlamboCore!"; // C string includes null-terminator, making this 16 bytes
 
 CRGB frameBuffer[BUFFER_LENGTH];
+PulsingSaturationPattern pulseRed(0, 96, 1000);
 BluePattern blue;
 GreenPattern green;
 RainbowFadePattern rainbow;
@@ -70,6 +72,7 @@ void initializeLeds()
     FastLED.addLeds<WS2811, LED_DATA_PIN, GRB>(frameBuffer, BUFFER_LENGTH);
     FastLED.show();
 
+    playlist.addPattern(&pulseRed);
     playlist.addPattern(&blue);
     playlist.addPattern(&green);
     playlist.addPattern(&rainbow);
