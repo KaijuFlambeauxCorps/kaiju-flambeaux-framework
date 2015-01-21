@@ -11,6 +11,7 @@
 #define BUFFER_LENGTH 100 // >100LEDs unsupported
 #define NUM_LEDS 100
 #define LED_DATA_PIN 6
+#define LED_DATA_PIN_SECOND_HALF 7
 #define INPUT_PIN 4
 #define LED_INDICATOR_PIN 9 // Hardwired on the board
 
