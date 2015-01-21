@@ -24,6 +24,8 @@ const char * const encryptionKey PROGMEM = "KyjuFlamboCore!"; // C string includ
 
 CRGB frameBuffer[BUFFER_LENGTH];
 PulsingSaturationPattern pulseRed(0, 96, 1000);
+PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 96, 700);
+PulsingSaturationPattern pulseBlue(HUE_MAX_RAINBOW / 3 * 2, 96, 450);
 BluePattern blue;
 GreenPattern green;
 RainbowFadePattern rainbow;
@@ -73,6 +75,8 @@ void initializeLeds()
     FastLED.show();
 
     playlist.addPattern(&pulseRed);
+    playlist.addPattern(&pulseGreen);
+    playlist.addPattern(&pulseBlue);
     playlist.addPattern(&blue);
     playlist.addPattern(&green);
     playlist.addPattern(&rainbow);
