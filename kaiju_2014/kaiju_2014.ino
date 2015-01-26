@@ -29,8 +29,6 @@ GradientPattern gradient2(RainbowColors_p);
 PulsingSaturationPattern pulseRed(0, 96, 1000);
 PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 96, 700);
 PulsingSaturationPattern pulseBlue(HUE_MAX_RAINBOW / 3 * 2, 96, 450);
-BluePattern blue;
-GreenPattern green;
 RainbowFadePattern rainbow;
 SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 255, 20);
 
@@ -83,8 +81,6 @@ void initializeLeds()
     playlist.addPattern(&pulseRed);
     playlist.addPattern(&pulseGreen);
     playlist.addPattern(&pulseBlue);
-    playlist.addPattern(&blue);
-    playlist.addPattern(&green);
     playlist.addPattern(&rainbow);
     playlist.addPattern(&sparks);
     playlist.currentPattern()->reset();
