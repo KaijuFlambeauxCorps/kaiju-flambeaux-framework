@@ -24,8 +24,8 @@
 const char * const encryptionKey PROGMEM = "KyjuFlamboCore!"; // C string includes null-terminator, making this 16 bytes
 
 CRGB frameBuffer[BUFFER_LENGTH];
-GradientPattern gradient(RainbowStripeColors_p);
-GradientPattern gradient2(RainbowColors_p);
+GradientPattern gradient(RainbowStripeColors_p, 16, 30);
+GradientPattern gradient2(RainbowColors_p, 16, 30);
 PulsingSaturationPattern pulseRed(0, 96, 1000);
 PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 96, 700);
 PulsingSaturationPattern pulseBlue(HUE_MAX_RAINBOW / 3 * 2, 96, 450);

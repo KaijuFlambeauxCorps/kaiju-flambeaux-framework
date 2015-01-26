@@ -15,7 +15,7 @@
 class GradientPattern: public Pattern
 {
 public:
-    GradientPattern(const TProgmemRGBPalette16 &palette);
+    GradientPattern(const TProgmemRGBPalette16 &palette, int colorStopDensity, int gradientStepTime);
     virtual ~GradientPattern();
 
     virtual void update(unsigned int deltaT);
@@ -29,8 +29,8 @@ private:
     unsigned int _phase;
 
     const TProgmemRGBPalette16 &_paletteToCopy;
-    static const int _gradientStepTime = 30;
-    static const int _colorStopDensity = 16;
+    int _gradientStepTime;
+    int _colorStopDensity;
 };
 
 #endif /* GRADIENTPATTERN_H_ */

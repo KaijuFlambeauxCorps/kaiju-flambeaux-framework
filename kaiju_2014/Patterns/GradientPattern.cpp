@@ -9,9 +9,11 @@
 
 CRGBPalette16 GradientPattern::_currentPalette;
 
-GradientPattern::GradientPattern(const TProgmemRGBPalette16 &palette)
+GradientPattern::GradientPattern(const TProgmemRGBPalette16 &palette, int colorStopDensity, int gradientStepTime)
 : _paletteToCopy(palette),
-  _phase(0)
+  _phase(0),
+  _colorStopDensity(colorStopDensity),
+  _gradientStepTime(gradientStepTime)
 {
     reset();
 }
