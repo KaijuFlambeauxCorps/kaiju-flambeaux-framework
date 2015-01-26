@@ -32,25 +32,47 @@ extern const TProgmemRGBPalette16 MardiGrasColors_p PROGMEM =
 
 GradientPattern mardiGrasGradient(MardiGrasColors_p, 4, 33);
 GradientPattern rainbowStripeGradient(RainbowStripeColors_p, 4, 33);
-GradientPattern rainbowGradient(RainbowColors_p, 8, 33);
-GradientPattern forestGradient(ForestColors_p, 8, 33);
-GradientPattern lavaGradient(LavaColors_p, 8, 33);
-PulsingSaturationPattern pulsePurple(HUE_MAX_RAINBOW / 6 * 5, 128, 1000);
-PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 128, 700);
-PulsingSaturationPattern pulseGold(HUE_MAX_RAINBOW / 6, 128, 450);
+GradientPattern forestGradient(ForestColors_p, 4, 33);
+GradientPattern lavaGradient(LavaColors_p, 4, 33);
+PulsingSaturationPattern pulsePurple(190, 128, 1000);
+PulsingSaturationPattern pulseGreen(90, 128, 700);
+PulsingSaturationPattern pulseGold(50, 128, 450);
 RainbowFadePattern rainbow;
-SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 128, 20);
+SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 140, 20);
+
+
+unsigned char mgSelector()
+{
+    switch(random8(6))
+    {
+        case 0:
+        case 1:
+            return 190; // purple
+        case 2:
+        case 3:
+            return 50; // yellow
+        case 4:
+        case 5:
+        default:
+            return 90; // green
+    }
+}
+SparksPattern mgSparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 140, 20, 1, mgSelector);
 
 void addPatternsToPlaylist(Playlist* playlist)
 {
+    playlist->addPattern(&mgSparks);
+    playlist->addPattern(&sparks);
+
     playlist->addPattern(&mardiGrasGradient);
     playlist->addPattern(&rainbowStripeGradient);
-    playlist->addPattern(&rainbowGradient);
+
     playlist->addPattern(&forestGradient);
-    playlist->addPattern(&lavaGradient);
     playlist->addPattern(&pulsePurple);
+
+    playlist->addPattern(&lavaGradient);
     playlist->addPattern(&pulseGreen);
-    playlist->addPattern(&pulseGold);
+
     playlist->addPattern(&rainbow);
-    playlist->addPattern(&sparks);
+    playlist->addPattern(&pulseGold);
 }
