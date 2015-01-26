@@ -25,7 +25,7 @@ void RainbowFadePattern::update(unsigned int deltaT)
 
 void RainbowFadePattern::draw(CRGB *frameBuffer)
 {
-    fill_rainbow(frameBuffer, NUM_LEDS, (_time / 10) % 255, 6);
+    fill_rainbow(frameBuffer, NUM_LEDS, (_time / 10) & 0xFF, 6);
 
     // Dim the brightness a little (or a lot)
     for (unsigned char pixel = 0; pixel < NUM_LEDS; ++pixel) {
