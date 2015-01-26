@@ -35,9 +35,9 @@ GradientPattern rainbowStripeGradient(RainbowStripeColors_p, 4, 33);
 GradientPattern rainbowGradient(RainbowColors_p, 8, 33);
 GradientPattern forestGradient(ForestColors_p, 8, 33);
 GradientPattern lavaGradient(LavaColors_p, 8, 33);
-PulsingSaturationPattern pulsePurple(HUE_MAX_RAINBOW / 6 * 5, 96, 1000);
-PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 96, 700);
-PulsingSaturationPattern pulseGold(HUE_MAX_RAINBOW / 6, 96, 450);
+PulsingSaturationPattern pulsePurple(HUE_MAX_RAINBOW / 6 * 5, 128, 1000);
+PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 128, 700);
+PulsingSaturationPattern pulseGold(HUE_MAX_RAINBOW / 6, 128, 450);
 RainbowFadePattern rainbow;
 SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 128, 20);
 
