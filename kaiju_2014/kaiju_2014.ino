@@ -24,8 +24,10 @@
 const char * const encryptionKey PROGMEM = "KyjuFlamboCore!"; // C string includes null-terminator, making this 16 bytes
 
 CRGB frameBuffer[BUFFER_LENGTH];
-GradientPattern gradient(RainbowStripeColors_p, 16, 30);
-GradientPattern gradient2(RainbowColors_p, 16, 30);
+GradientPattern rainbowStripeGradient(RainbowStripeColors_p, 4, 33);
+GradientPattern rainbowGradient(RainbowColors_p, 16, 30);
+GradientPattern forestGradient(ForestColors_p, 16, 30);
+GradientPattern lavaGradient(LavaColors_p, 16, 30);
 PulsingSaturationPattern pulseRed(0, 96, 1000);
 PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 96, 700);
 PulsingSaturationPattern pulseBlue(HUE_MAX_RAINBOW / 3 * 2, 96, 450);
@@ -76,8 +78,10 @@ void initializeLeds()
     FastLED.addLeds<WS2811, LED_DATA_PIN_SECOND_HALF, GRB>(frameBuffer + BUFFER_LENGTH / 2, BUFFER_LENGTH / 2).setCorrection(Typical8mmPixel);
     FastLED.show();
 
-    playlist.addPattern(&gradient);
-    playlist.addPattern(&gradient2);
+    playlist.addPattern(&rainbowStripeGradient);
+    playlist.addPattern(&rainbowGradient);
+    playlist.addPattern(&forestGradient);
+    playlist.addPattern(&lavaGradient);
     playlist.addPattern(&pulseRed);
     playlist.addPattern(&pulseGreen);
     playlist.addPattern(&pulseBlue);
@@ -152,8 +156,10 @@ void render()
     Pattern* currentPattern = playlist.currentPattern();
     uint16_t timeSinceLastFrame = currentTime - lastFrameTime; // truncate
 
+    digitalWrite(LED_INDICATOR_PIN, HIGH); // Use this to debug how long is spent on the pattern
     currentPattern->update(timeSinceLastFrame);
     currentPattern->draw(frameBuffer);
+    digitalWrite(LED_INDICATOR_PIN, LOW);
 
     FastLED.show();
 }
