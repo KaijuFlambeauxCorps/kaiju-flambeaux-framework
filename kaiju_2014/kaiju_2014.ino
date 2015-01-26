@@ -6,15 +6,6 @@
 
 #include "FastLED.h"
 
-#include "Patterns/Pattern.h"
-#include "Patterns/GradientPattern.h"
-#include "Patterns/PulsingSaturationPattern.h"
-#include "Patterns/BluePattern.h"
-#include "Patterns/GreenPattern.h"
-#include "Patterns/RainbowFadePattern.h"
-#include "Patterns/SparksPattern.h"
-#include "Playlist.h"
-
 #include "RadioHead.h"
 #include "RH_RF69.h"
 
@@ -24,15 +15,6 @@
 const char * const encryptionKey PROGMEM = "KyjuFlamboCore!"; // C string includes null-terminator, making this 16 bytes
 
 CRGB frameBuffer[BUFFER_LENGTH];
-GradientPattern rainbowStripeGradient(RainbowStripeColors_p, 4, 33);
-GradientPattern rainbowGradient(RainbowColors_p, 16, 30);
-GradientPattern forestGradient(ForestColors_p, 16, 30);
-GradientPattern lavaGradient(LavaColors_p, 16, 30);
-PulsingSaturationPattern pulseRed(0, 96, 1000);
-PulsingSaturationPattern pulseGreen(HUE_MAX_RAINBOW / 3, 96, 700);
-PulsingSaturationPattern pulseBlue(HUE_MAX_RAINBOW / 3 * 2, 96, 450);
-RainbowFadePattern rainbow;
-SparksPattern sparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 255, 20);
 
 Playlist playlist;
 
@@ -78,15 +60,7 @@ void initializeLeds()
     FastLED.addLeds<WS2811, LED_DATA_PIN_SECOND_HALF, GRB>(frameBuffer + BUFFER_LENGTH / 2, BUFFER_LENGTH / 2).setCorrection(Typical8mmPixel);
     FastLED.show();
 
-    playlist.addPattern(&rainbowStripeGradient);
-    playlist.addPattern(&rainbowGradient);
-    playlist.addPattern(&forestGradient);
-    playlist.addPattern(&lavaGradient);
-    playlist.addPattern(&pulseRed);
-    playlist.addPattern(&pulseGreen);
-    playlist.addPattern(&pulseBlue);
-    playlist.addPattern(&rainbow);
-    playlist.addPattern(&sparks);
+    addPatternsToPlaylist(&playlist);
     playlist.currentPattern()->reset();
 }
 

@@ -15,3 +15,7 @@ archives/*
 *.swp
 *.kate-swp
 
+# Individual upload scripts
+*.sh
+*.bat
+*.cmd
