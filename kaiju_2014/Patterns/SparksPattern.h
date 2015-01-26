@@ -29,6 +29,7 @@
 
 #define MAX_SPARKS 12
 
+#include <stdlib.h>
 #include "../Patterns/Pattern.h"
 
 struct Spark;
@@ -38,6 +39,8 @@ union CombinedBuffer
     CHSV *hsv;
     CRGB *rgb;
 };
+
+typedef unsigned char (*HueSelector)();
 
 class SparksPattern: public Pattern
 {
@@ -50,7 +53,8 @@ public:
                   unsigned char valMin,
                   unsigned char valMax,
                   unsigned char sparkDistance,
-                  unsigned char startOffset = 1);
+                  unsigned char startOffset = 1,
+                  HueSelector hueSelector = NULL);
     virtual ~SparksPattern();
 
     virtual void update(unsigned int deltaT);
@@ -71,6 +75,8 @@ private:
     const unsigned char _valFalloffDistance;
     const unsigned char _valMin;
     const unsigned char _valMax;
+
+    HueSelector _hueSelector;
 
     static Spark _sparks[MAX_SPARKS];
     unsigned char _sparkCount;

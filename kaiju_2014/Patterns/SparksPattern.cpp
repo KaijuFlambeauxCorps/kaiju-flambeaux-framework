@@ -41,7 +41,8 @@ SparksPattern::SparksPattern(CRGB *rgbBuffer,
                              unsigned char valMin,
                              unsigned char valMax,
                              unsigned char sparkDistance,
-                             unsigned char startOffset)
+                             unsigned char startOffset,
+                             HueSelector hueSelector)
         : _length(length),
           _timeBetweenFrames(1000 / framesPerSecond),
           _timeUntilNextFrame(0),
@@ -51,7 +52,8 @@ SparksPattern::SparksPattern(CRGB *rgbBuffer,
           _valFalloffDistance(valFalloffDistance),
           _valMin(valMin),
           _valMax(valMax),
-          _sparkCount(1)
+          _sparkCount(1),
+          _hueSelector(hueSelector)
 {
     _buffer.rgb = rgbBuffer;
 
@@ -93,6 +95,9 @@ void SparksPattern::advanceSparks()
 
 unsigned char SparksPattern::pickHue()
 {
+    if (_hueSelector != NULL)
+        return _hueSelector();
+
     return rand() % HUE_MAX_RAINBOW;
 }
 
