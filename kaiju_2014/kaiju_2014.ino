@@ -25,28 +25,19 @@ bool isTransmitter;
 void initializeRadio()
 {
     Serial.begin(57600);
-    Serial.println("Initialising radio...");
+    Serial.println("RadioInit");
     radio.init();
 
-    Serial.print("Setting radio frequency to ");
-    Serial.print(RadioFrequency);
-    Serial.println("MHz...");
     radio.setFrequency(RadioFrequency);
-
-    Serial.print("Setting radio encryption key to \"");
-    Serial.print(encryptionKey);
-    Serial.println("\"...");
     radio.setEncryptionKey((unsigned char*) (encryptionKey));
-
-    Serial.println("Setting modem config...");
     radio.setModemConfig(RH_RF69::GFSK_Rb19_2Fd38_4);
 
-    Serial.println("Initialising pins... ");
+    Serial.println("PinInit");
     pinMode(INPUT_PIN, INPUT_PULLUP);
 
-    Serial.print("Radio messages will be ");
+/*  Serial.print("Radio messages will be ");
     Serial.print(RadioMessage::Size());
-    Serial.println(" bytes in length.");
+    Serial.println(" bytes in length."); */
 }
 
 void initializeLeds()
@@ -92,12 +83,12 @@ void transmitLoop()
         message->messageType = MessageType::SetPattern;
         message->payload = playlist.getCurrentPatternIndex();
 
-        Serial.print("Instructing other units to change to pattern ");
-        Serial.print(message->payload);
-        Serial.print("...");
+//        Serial.print("Instructing other units to change to pattern ");
+//        Serial.print(message->payload);
+//        Serial.print("...");
         radio.send(txBuffer, RadioMessage::Size());
         radio.waitPacketSent();
-        Serial.println(" Done.");
+//        Serial.println(" Done.");
     }
 
     isButtonHeld = isButtonDown;
@@ -109,16 +100,16 @@ void receiveLoop()
 
     if (radio.available()) {
         digitalWrite(LED_INDICATOR_PIN, HIGH);
-        Serial.println("\r\nRadio message available! ");
+//        Serial.println("\r\nRadio message available! ");
 
         // Set maximum receive size (will be overwritten with actual received packet length)
         incomingPacketLength = RadioMessage::Size();
 
         if (radio.recv(rxBuffer, &incomingPacketLength)) {
-            Serial.print("Message type: ");
-            Serial.print(message->messageType);
-            Serial.print(", payload: ");
-            Serial.println(message->payload);
+//            Serial.print("Message type: ");
+//            Serial.print(message->messageType);
+//            Serial.print(", payload: ");
+//            Serial.println(message->payload);
 
             playlist.goToPattern(message->payload);
         }

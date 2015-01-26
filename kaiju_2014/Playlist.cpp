@@ -8,7 +8,8 @@
 #include "Playlist.h"
 
 Playlist::Playlist()
-        : _patterns { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        : _patterns { 0, 0, 0, 0, 0, 0, 0, 0,
+                      0, 0, 0, 0 },
           _currentPatternIndex(0),
           _patternCount(0)
 {
