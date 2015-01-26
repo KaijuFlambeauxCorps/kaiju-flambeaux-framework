@@ -29,7 +29,7 @@ public:
     }
 
 private:
-    Pattern *_patterns[10];
+    Pattern *_patterns[12];
     unsigned char _currentPatternIndex;
     unsigned char _patternCount;
 };
