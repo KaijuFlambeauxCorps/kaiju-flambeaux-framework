@@ -34,10 +34,6 @@ void initializeRadio()
 
     Serial.println("PinInit");
     pinMode(INPUT_PIN, INPUT_PULLUP);
-
-/*  Serial.print("Radio messages will be ");
-    Serial.print(RadioMessage::Size());
-    Serial.println(" bytes in length."); */
 }
 
 void initializeLeds()
@@ -83,12 +79,8 @@ void transmitLoop()
         message->messageType = MessageType::SetPattern;
         message->payload = playlist.getCurrentPatternIndex();
 
-//        Serial.print("Instructing other units to change to pattern ");
-//        Serial.print(message->payload);
-//        Serial.print("...");
         radio.send(txBuffer, RadioMessage::Size());
         radio.waitPacketSent();
-//        Serial.println(" Done.");
     }
 
     isButtonHeld = isButtonDown;
@@ -100,17 +92,11 @@ void receiveLoop()
 
     if (radio.available()) {
         digitalWrite(LED_INDICATOR_PIN, HIGH);
-//        Serial.println("\r\nRadio message available! ");
 
         // Set maximum receive size (will be overwritten with actual received packet length)
         incomingPacketLength = RadioMessage::Size();
 
         if (radio.recv(rxBuffer, &incomingPacketLength)) {
-//            Serial.print("Message type: ");
-//            Serial.print(message->messageType);
-//            Serial.print(", payload: ");
-//            Serial.println(message->payload);
-
             playlist.goToPattern(message->payload);
         }
     }
