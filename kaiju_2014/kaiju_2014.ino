@@ -47,8 +47,8 @@ void initializeLeds()
     // Set uninitialised LEDs to a faint grey
     memset8(frameBuffer, 1, BUFFER_LENGTH * sizeof(CRGB));
 
-    FastLED.addLeds<WS2811, LED_DATA_PIN, GRB>(frameBuffer, BUFFER_LENGTH).setCorrection(Typical8mmPixel);
-    FastLED.addLeds<WS2811, LED_DATA_PIN_SECOND_HALF, GRB>(frameBuffer + BUFFER_LENGTH / 2, BUFFER_LENGTH / 2).setCorrection(Typical8mmPixel);
+    FastLED.addLeds<WS2811, LED_DATA_PIN, RGB>(frameBuffer, BUFFER_LENGTH).setCorrection(Typical8mmPixel);
+    FastLED.addLeds<WS2811, LED_DATA_PIN_SECOND_HALF, RGB>(frameBuffer + BUFFER_LENGTH / 2, BUFFER_LENGTH / 2).setCorrection(Typical8mmPixel);
     FastLED.show();
 
     addPatternsToPlaylist(&playlist);
