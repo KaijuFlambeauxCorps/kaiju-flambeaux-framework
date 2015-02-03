@@ -24,15 +24,12 @@ bool isTransmitter;
 
 void initializeRadio()
 {
-    Serial.begin(57600);
-    Serial.println("RadioInit");
     radio.init();
 
     radio.setFrequency(RadioFrequency);
     radio.setEncryptionKey((unsigned char*) (encryptionKey));
     radio.setModemConfig(RH_RF69::GFSK_Rb19_2Fd38_4);
 
-    Serial.println("PinInit");
     pinMode(INPUT_PIN, INPUT_PULLUP);
 }
 
