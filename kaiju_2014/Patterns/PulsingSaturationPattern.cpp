@@ -20,6 +20,12 @@ PulsingSaturationPattern::~PulsingSaturationPattern()
 {
 }
 
+
+void PulsingSaturationPattern::reset()
+{
+    _phase = 0;
+}
+
 void PulsingSaturationPattern::update(unsigned int deltaT)
 {
     _phase += deltaT;

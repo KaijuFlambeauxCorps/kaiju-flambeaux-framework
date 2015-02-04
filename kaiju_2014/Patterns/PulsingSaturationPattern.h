@@ -18,6 +18,7 @@ public:
 
     virtual void update(unsigned int deltaT);
     virtual void draw(CRGB *frameBuffer);
+    virtual void reset();
 
 private:
     const unsigned char _hue;

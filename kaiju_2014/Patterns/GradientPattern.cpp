@@ -23,6 +23,7 @@ GradientPattern::~GradientPattern() { }
 void GradientPattern::reset()
 {
     _currentPalette = CRGBPalette16(_paletteToCopy);
+    _phase = 0;
 }
 
 void GradientPattern::update(unsigned int deltaT)

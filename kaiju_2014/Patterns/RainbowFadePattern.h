@@ -18,8 +18,9 @@ public:
 
     virtual void update(unsigned int deltaT);
     virtual void draw(CRGB *frameBuffer);
+    virtual void reset();
 private:
-    unsigned int _time;
+    unsigned int _phase;
 };
 
 #endif /* RAINBOWFADEPATTERN_H_ */
