@@ -62,10 +62,10 @@ SparksPattern mgSparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 140, 20, 1, mgSelec
 void addPatternsToPlaylist(Playlist* playlist)
 {
     playlist->addPattern(&mgSparks);
-    playlist->addPattern(&sparks);
+    playlist->addPattern(&rainbowStripeGradient);
 
     playlist->addPattern(&mardiGrasGradient);
-    playlist->addPattern(&rainbowStripeGradient);
+    playlist->addPattern(&sparks);
 
     playlist->addPattern(&forestGradient);
     playlist->addPattern(&pulsePurple);
