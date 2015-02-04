@@ -79,7 +79,7 @@ private:
     HueSelector _hueSelector;
 
     static Spark _sparks[MAX_SPARKS];
-    unsigned char _sparkCount;
+    static unsigned char _sparkCount;
 
     CombinedBuffer _buffer;
 

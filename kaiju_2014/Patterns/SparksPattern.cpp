@@ -32,6 +32,7 @@
 #include "hsv2rgb.h"
 
 Spark SparksPattern::_sparks[MAX_SPARKS] = {};
+unsigned char SparksPattern::_sparkCount = 1;
 
 SparksPattern::SparksPattern(CRGB *rgbBuffer,
                              unsigned char length,
@@ -52,7 +53,6 @@ SparksPattern::SparksPattern(CRGB *rgbBuffer,
           _valFalloffDistance(valFalloffDistance),
           _valMin(valMin),
           _valMax(valMax),
-          _sparkCount(1),
           _hueSelector(hueSelector)
 {
     _buffer.rgb = rgbBuffer;
