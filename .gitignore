@@ -1,6 +1,5 @@
 # Compiled files
 
-kaiju_2014/Release
 *.hex
 *.elf
 *.o
@@ -16,6 +15,6 @@ archives/*
 *.kate-swp
 
 # Individual upload scripts
-*.sh
-*.bat
-*.cmd
+#*.sh
+#*.bat
+#*.cmd
