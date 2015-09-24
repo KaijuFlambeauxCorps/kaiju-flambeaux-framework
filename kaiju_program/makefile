@@ -13,7 +13,7 @@ ARDUINO_DIR       = /home/tully/ArduinoSDK/1.6.4
 
 ### USER_LIB_PATH
 ### Path to where the your project's libraries are stored.
-USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
+USER_LIB_PATH    :=  $(PROJECT_DIR)/Libraries
 
 ### BOARD_TAG
 ### It must be set to the board you are currently using. (i.e uno, mega2560, etc.)
