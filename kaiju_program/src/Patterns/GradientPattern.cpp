@@ -37,6 +37,6 @@ void GradientPattern::draw(CRGB frameBuffer[])
     int offset = (_phase / _gradientStepTime);
     for (unsigned char pixelIndex = 0; pixelIndex < NUM_LEDS; ++pixelIndex) {
         unsigned char gradientIndex = ( (pixelIndex * _colorStopDensity) + offset) & 0xFF;
-        frameBuffer[pixelIndex] = ColorFromPalette(_currentPalette, gradientIndex, 96, BLEND);
+        frameBuffer[pixelIndex] = ColorFromPalette(_currentPalette, gradientIndex, 96, LINEARBLEND);
     }
 }

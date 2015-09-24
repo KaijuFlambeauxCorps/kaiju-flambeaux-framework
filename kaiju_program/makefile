@@ -13,11 +13,15 @@ ARDUINO_DIR       = /home/tully/ArduinoSDK/1.6.4
 
 ### USER_LIB_PATH
 ### Path to where the your project's libraries are stored.
-USER_LIB_PATH    :=  $(PROJECT_DIR)/Libraries
+USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
+
+ARDUINO_LIBS      = SPI FastLED RadioHead
 
 ### BOARD_TAG
 ### It must be set to the board you are currently using. (i.e uno, mega2560, etc.)
-BOARD_TAG         = diecimila
+ARCHITECTURE  = avr
+BOARD_TAG     = diecimila
+BOARD_SUB     = atmega328
 
 ### MONITOR_BAUDRATE
 ### It must be set to Serial baudrate value you are using.
@@ -41,7 +45,7 @@ CXXFLAGS_STD      = -std=gnu++11
 
 ### CXXFLAGS
 ### Flags you might want to set for debugging purpose. Comment to stop.
-CXXFLAGS         += -pedantic -Wall -Wextra
+#CXXFLAGS         += -pedantic -Wall -Wextra
 
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.

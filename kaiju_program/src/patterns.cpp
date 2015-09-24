@@ -7,6 +7,7 @@
 
 #include "config.h"
 
+#include "led_sysdefs.h"
 #include "hsv2rgb.h"
 #include "colorpalettes.h"
 

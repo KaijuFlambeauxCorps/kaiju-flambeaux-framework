@@ -1,5 +1,5 @@
 # Compiled files
-
+kaiju_program/bin
 *.hex
 *.elf
 *.o

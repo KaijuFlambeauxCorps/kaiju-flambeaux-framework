@@ -10,6 +10,7 @@
 
 #include "../config.h"
 
+#include "led_sysdefs.h"
 #include "pixeltypes.h"
 #include "colorutils.h"
 

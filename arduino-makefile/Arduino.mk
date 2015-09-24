@@ -762,12 +762,21 @@ endif
 ########################################################################
 # Local sources
 
-LOCAL_C_SRCS    ?= $(wildcard *.c)
-LOCAL_CPP_SRCS  ?= $(wildcard *.cpp)
-LOCAL_CC_SRCS   ?= $(wildcard *.cc)
-LOCAL_PDE_SRCS  ?= $(wildcard *.pde)
-LOCAL_INO_SRCS  ?= $(wildcard *.ino)
-LOCAL_AS_SRCS   ?= $(wildcard *.S)
+# recursive wildcard function, call with params:
+#  - start directory (finished with /) or empty string for current dir
+#  - glob pattern
+# (taken from http://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html)
+rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
+
+# $(call rwildcard,$(1)/src/,*.$(2))
+# $(call rwildcard,,*.c)
+
+LOCAL_C_SRCS    ?= $(call rwildcard,$(PROJECT_DIR)/src,*.c)
+LOCAL_CPP_SRCS  ?= $(call rwildcard,$(PROJECT_DIR)/src,*.cpp)
+LOCAL_CC_SRCS   ?= $(call rwildcard,$(PROJECT_DIR)/src,*.cc)
+LOCAL_PDE_SRCS  ?= $(call rwildcard,$(PROJECT_DIR)/src,*.pde)
+LOCAL_INO_SRCS  ?= $(call rwildcard,$(PROJECT_DIR)/src,*.ino)
+LOCAL_AS_SRCS   ?= $(call rwildcard,$(PROJECT_DIR)/src,*.S)
 LOCAL_SRCS      = $(LOCAL_C_SRCS)   $(LOCAL_CPP_SRCS) \
 		$(LOCAL_CC_SRCS)   $(LOCAL_PDE_SRCS) \
 		$(LOCAL_INO_SRCS) $(LOCAL_AS_SRCS)
@@ -906,12 +915,6 @@ MV      = mv -f
 CAT     = cat
 ECHO    = printf
 MKDIR   = mkdir -p
-
-# recursive wildcard function, call with params:
-#  - start directory (finished with /) or empty string for current dir
-#  - glob pattern
-# (taken from http://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html)
-rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
 # functions used to determine various properties of library
 # called with library path. Needed because of differences between library
