@@ -7,6 +7,7 @@
 #ifndef _KAIJU_PROGRAM_H_
 #define _KAIJU_PROGRAM_H_
 #include "Arduino.h"
+#include "cplusplus.h"
 //add your includes for the project here
 
 #include "Playlist.h"

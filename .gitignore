@@ -5,8 +5,11 @@ kaiju_program/bin
 *.o
 *.d
 
-# Downloaded library archives
+# IDE cruft
+kaiju_program/.kdev4/
+kaiju_program/kaiju_program.kdev4
 
+# Downloaded library archives
 archives/*
 
 # Dolphin etc
