@@ -1,5 +1,5 @@
 // THIS INCLUDE MUST BE FIRST
-#include "kaiju_2014.h"
+#include "kaiju_program.h"
 /////////////////////////////
 
 #include "config.h"
