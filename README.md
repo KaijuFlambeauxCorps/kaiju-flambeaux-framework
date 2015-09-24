@@ -1,5 +1,7 @@
-KFC 2014
-========
+Kaiju Flambeaux Corps lightsuits
+================================
+
+**NOTE 2015-09-24: Please note that these instructions refer to [the 2015 version of the Kaiju suits](https://github.com/tullo-x86/kaiju-flambeaux-corps/tree/v1.1) and are not applicable to the 2016 suits until this document is updated.**
 
 Initial setup
 -------------
