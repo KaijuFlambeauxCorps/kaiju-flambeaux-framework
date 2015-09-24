@@ -1,6 +1,6 @@
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
-PROJECT_DIR       = /home/tully/projects/HexPanel/Code
+PROJECT_DIR       = /home/tully/projects/kaiju-flambeaux-corps/kaiju_program
 
 ### ARDMK_DIR
 ### Path to the Arduino-Makefile directory.
