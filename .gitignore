@@ -9,15 +9,8 @@ kaiju_program/bin
 kaiju_program/.kdev4/
 kaiju_program/kaiju_program.kdev4
 
-# Downloaded library archives
-archives/*
-
-# Dolphin etc
+# File explorer caches and other nonsense
 .directory
 *.swp
 *.kate-swp
-
-# Individual upload scripts
-#*.sh
-#*.bat
-#*.cmd
+Thumbs.db
