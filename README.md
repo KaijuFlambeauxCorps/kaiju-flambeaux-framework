@@ -1,49 +1,42 @@
-Kaiju Flambeaux Corps lightsuits
-================================
+# Kaiju Flambeaux Corps lightsuits
 
-**NOTE 2015-09-24: Please note that these instructions refer to [the 2015 version of the Kaiju suits](https://github.com/tullo-x86/kaiju-flambeaux-corps/tree/v1.1) and are not applicable to the 2016 suits until this document is updated.**
+MIT-licenced goodness for bootstrapping your radio-synchronised LED project. Includes the patterns displayed in the [2015 Chewbacchus parade][1].
 
-Initial setup
--------------
+**Note for parade krewe members**: This is *not* the program we will be running in Chewbacchus 2016! This is the open-source framework for LED control which that project uses, and contains the 2015 patterns as an example of implementation.
+
+## Getting started
 
 ### Prerequisite software
 
-To work collaboratively on this project, you will need the [Git source control software][5] installed. On Windows, you can also use the graphical tool [Git Extensions][4] to simplify working with Git.
+#### All platforms
 
-At the very least you will need the [Arduino Software][3] installed. I recommend using [Eclipse][1] (the C++ variant), and the [Arduino Eclipse plugin][2] (which requires the Arduino Software as well) to avoid going insane while writing code, because IDEs are important tools, and the Arduino Software on its own is a terrible IDE.
+- [Arduino Software][2] (1.6.4 or later)
+- Your preferred IDE or text editor (makefile support encouraged)
 
-### Setting up the Arduino Eclipse Plugin
+#### Windows
 
-1. Follow the instructions on the [Arduino Eclipse "how-to" page][6]: particularly the sections **Install V2 plugin** and **Configure**
+*Instructions pending verification*
 
-### Importing FastLED
+### Initial setup
 
-1. Download [FastLED 3.0.3][https://github.com/FastLED/FastLED/archive/3.0.3.zip].
-2. Rename the downloaded .zip file to "FastLED.zip" (the Arduino software will hiccup otherwise)
-3. Start the Arduino Software
-4. From the menu bar, choose *Sketch > Import Library > Add Library...*
-5. Locate the .zip file you downloaded
-6. Verify that FastLED was imported by choosing *Sketch > Import Library* and inspecting the bottom of the menu (there should be a `FastLED` entry)
+You'll need to configure a handful of options in the makefile before the project will build and upload. Open `kaiju_program/makefile` and make these changes:
 
-### Opening the sketch (if using the Arduino Software)
+- Set `PROJECT_DIR` to an absolute path to your `kaiju_program` directory
+- Set `ARDUINO_DIR` to an absolute path to your Arduino Software installation (for example, `C:\Arduino`)
+- Set `MONITOR_PORT` to the port you use to communicate with your programmer.
+  - On Windows, this will be a COM port.
+  - On Linux, this will be `/dev/ttyUSB*` or `/dev/ttyACM*` depending on the type of programmer you have.
+  - I don't have a Mac handy, but I think it shows up as `/dev/tty.usbmodem*`.
+- **If you are using different hardware than the [Anarduino MiniWireless][3]**, you may need to update `BOARD_TAG` and `BOARD_SUB`. These correspond to the *Board* and *Processor* settings in the Arduino Software's *Tools* menu, but are not the same as the displayed text in that menu. The correct values can be found in the `boards.txt` file in your Arduino Software installation.
 
-1. Clone the git repository into a directory. This can be done via the command line by typing `git clone https://github.com/tullo-x86/kaiju2014.git kfc2014` (This will create a folder called `kfc2014` in your working directory)
-2. Open the `kaiju_2014.ino` file inside the `kfc2014/kaiju_2014` directory.
-3. Try not to let editing code inside a pure text editor kill your paassion for coding.
+### Building the project
 
-### Importing the projects (if using the Eclipse plugin)
+From a console, enter the `kaiju_program` directory and execute `make all`. If the build succeeds, the static memory usage of the program will be displayed.
 
-1. Clone the git repository into a directory. This can be done via the command line by typing `git clone https://github.com/tullo-x86/kaiju2014.git kfc2014` (This will create a folder called `kfc2014` in your working directory)
-2. In Eclipse, choose *File > Import* from the menu bar
-3. Choose *Existing projects into Workspace* and click Next
-4. Make sure *Select root directory* is selected, click *Browse...*, and navigate to the kfc2014 directory that git created for you
-5. Verify that the project is listed and checked (you should see `kaiju-2014`), and click *Finish*
-6. Once that closes, verify that it builds by selecting *Project > Build All* from the menu bar
-7. Use the Arduino-like buttons in the toolbar to upload the program to your board.
+### Uploading the program
 
-[1]: http://eclipse.org/downloads/packages/eclipse-ide-cc-developers/lunasr1
-[2]: http://eclipse.baeyens.it/rlogiacco/index.html
-[3]: http://arduino.cc/en/Main/Software
-[4]: https://code.google.com/p/gitextensions/
-[5]: http://git-scm.com/downloads
-[6]: http://eclipse.baeyens.it/rlogiacco/how_to.shtml
+From a console, enter the `kaiju_program` directory and execute `make upload`. If your build succeeds, `avrdude done.  Thank you.` will be displayed.
+
+[1]: https://www.youtube.com/watch?v=r27eCkilbfY
+[2]: https://arduino.cc/en/Main/Software
+[3]: http://www.anarduino.com/miniwireless/
