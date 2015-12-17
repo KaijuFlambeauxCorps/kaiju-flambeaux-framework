@@ -9,7 +9,7 @@ ARDMK_DIR         = $(PROJECT_DIR)/../arduino-makefile
 ### ARDUINO_DIR
 ### Path to the Arduino application and resources directory. It should point to the extracted contents of the Arduino Software download.
 ### On Windows, this would be something like `C:\Arduino`. 
-ARDUINO_DIR       = /home/tully/ArduinoSDK/1.6.5
+ARDUINO_DIR       = /home/tully/ArduinoSDK/1.6.6
 
 ### USER_LIB_PATH
 ### Path to where the project's libraries are stored. I've opted to place this directory beside, not inside, the src/ directory. Libraries included with the Arduino Software don't need to be included here.

@@ -1,18 +1,19 @@
-// THIS INCLUDE MUST BE FIRST
-#include "kaiju_program.h"
-/////////////////////////////
 
-#include "config.h"
 
-#include "FastLED.h"
+#include "Arduino.h"
+#include "cplusplus.h"
+
+#include <FastLED.h>
 
 #include "RadioHead.h"
 #include "RH_RF69.h"
 
 #include "RadioMessage.h"
+#include "config.h"
+#include "Playlist.h"
 
-// Encryption key must be 16 bytes
-const char * const encryptionKey PROGMEM = "KyjuFlamboCore!"; // C string includes null-terminator, making this 16 bytes
+// Encryption key must be 16 bytes "0123456789ABCDEF"
+const char * const encryptionKey = "KaijuFlamboCore!";
 
 CRGB frameBuffer[BUFFER_LENGTH];
 
@@ -20,14 +21,13 @@ Playlist playlist;
 
 RH_RF69 radio;
 const float RadioFrequency = 915.0;
-bool isTransmitter;
 
 void initializeRadio()
 {
     radio.init();
 
     radio.setFrequency(RadioFrequency);
-    radio.setEncryptionKey((unsigned char*) (encryptionKey));
+    radio.setEncryptionKey((uint8_t *) (encryptionKey));
     radio.setModemConfig(RH_RF69::GFSK_Rb19_2Fd38_4);
 
     pinMode(INPUT_PIN, INPUT_PULLUP);
