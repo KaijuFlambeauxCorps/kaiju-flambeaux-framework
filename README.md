@@ -1,6 +1,6 @@
 # Kaiju Flambeaux Corps lightsuits
 
-MIT-licenced goodness for bootstrapping your radio-synchronised LED project. Includes the patterns displayed in the [2015 Chewbacchus parade][1].
+GPLv2-licenced goodness for bootstrapping your radio-synchronised LED project. Includes the patterns displayed in the [2015 Chewbacchus parade][1].
 
 **Note for parade krewe members**: This is *not* the program we will be running in Chewbacchus 2016! This is the open-source framework for LED control which that project uses, and contains the 2015 patterns as an example of implementation.
 
@@ -15,7 +15,7 @@ MIT-licenced goodness for bootstrapping your radio-synchronised LED project. Inc
 
 #### Windows
 
-*Instructions pending verification*
+I've had a lot of trouble getting GNU Make to work on Windows -- it often complains about missing files when the file exists. If you get this project to build using Arduino-Makefile as it is designed, please document your process, and submit any necessary changes to the source in a pull request.
 
 ### Initial setup
 
