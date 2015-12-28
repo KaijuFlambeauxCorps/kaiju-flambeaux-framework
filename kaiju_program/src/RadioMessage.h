@@ -5,8 +5,10 @@
  *      Author: tully
  */
 
-#ifndef RADIOMESSAGE_H_
-#define RADIOMESSAGE_H_
+#pragma once
+
+#include <stdint.h>
+#include <stddef.h>
 
 namespace MessageType
 {
@@ -32,4 +34,3 @@ union RadioMessage
     static size_t Size() { return sizeof(RadioMessage); }
 };
 
-#endif /* RADIOMESSAGE_H_ */

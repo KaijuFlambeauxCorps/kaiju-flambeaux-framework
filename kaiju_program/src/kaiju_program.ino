@@ -11,6 +11,7 @@
 #include "RadioMessage.h"
 #include "config.h"
 #include "Playlist.h"
+#include "kaiju_program.h"
 
 // Encryption key must be 16 bytes "0123456789ABCDEF"
 const char * const encryptionKey = "KaijuFlamboCore!";
@@ -44,7 +45,7 @@ void initializeLeds()
     FastLED.addLeds<WS2811, LED_DATA_PIN_SECOND_HALF, RGB>(frameBuffer + BUFFER_LENGTH / 2, BUFFER_LENGTH / 2).setCorrection(Typical8mmPixel);
     FastLED.show();
 
-    addPatternsToPlaylist(&playlist);
+    addPatternsToPlaylist();
     playlist.currentPattern()->reset();
 }
 
@@ -83,12 +84,19 @@ void transmitLoop()
     isButtonHeld = isButtonDown;
 }
 
+inline void debugRadioReceiver(uint8_t value)
+{
+#if DEBUG_RADIO_RECEIVER
+    digitalWrite(LED_INDICATOR_PIN, value);
+#endif
+}
+
 void receiveLoop()
 {
-    digitalWrite(LED_INDICATOR_PIN, LOW);
+    debugRadioReceiver(LOW);
 
     if (radio.available()) {
-        digitalWrite(LED_INDICATOR_PIN, HIGH);
+        debugRadioReceiver(HIGH);
 
         // Set maximum receive size (will be overwritten with actual received packet length)
         incomingPacketLength = RadioMessage::Size();
@@ -99,15 +107,22 @@ void receiveLoop()
     }
 }
 
+inline void debugRenderTime(uint8_t value)
+{
+#if DEBUG_RENDER_TIME
+    digitalWrite(LED_INDICATOR_PIN, value);
+#endif
+}
+
 void render()
 {
     Pattern* currentPattern = playlist.currentPattern();
     uint16_t timeSinceLastFrame = currentTime - lastFrameTime; // truncate
 
-    digitalWrite(LED_INDICATOR_PIN, HIGH); // Use this to debug how long is spent on the pattern
+    debugRenderTime(HIGH);
     currentPattern->update(timeSinceLastFrame);
     currentPattern->draw(frameBuffer);
-    digitalWrite(LED_INDICATOR_PIN, LOW);
+    debugRenderTime(LOW);
 
     FastLED.show();
 }

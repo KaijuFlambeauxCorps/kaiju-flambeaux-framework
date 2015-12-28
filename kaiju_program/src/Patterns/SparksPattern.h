@@ -78,6 +78,7 @@ private:
 
     HueSelector _hueSelector;
 
+    // This static allocation is a hack to save 24 bytes of memory, and I never should have written it. -- tully
     static Spark _sparks[MAX_SPARKS];
     static unsigned char _sparkCount;
 

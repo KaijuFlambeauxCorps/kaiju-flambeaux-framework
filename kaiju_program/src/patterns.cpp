@@ -60,20 +60,22 @@ unsigned char mgSelector()
 }
 SparksPattern mgSparks(frameBuffer, NUM_LEDS, 24, 3, 10, 96, 140, 20, 1, mgSelector);
 
-void addPatternsToPlaylist(Playlist* playlist)
+extern Playlist playlist;
+
+void addPatternsToPlaylist()
 {
-    playlist->addPattern(&mgSparks);
-    playlist->addPattern(&rainbowStripeGradient);
+    playlist.addPattern(&mgSparks);
+    playlist.addPattern(&rainbowStripeGradient);
 
-    playlist->addPattern(&mardiGrasGradient);
-    playlist->addPattern(&sparks);
+    playlist.addPattern(&mardiGrasGradient);
+    playlist.addPattern(&sparks);
 
-    playlist->addPattern(&forestGradient);
-    playlist->addPattern(&pulsePurple);
+    playlist.addPattern(&forestGradient);
+    playlist.addPattern(&pulsePurple);
 
-    playlist->addPattern(&lavaGradient);
-    playlist->addPattern(&pulseGreen);
+    playlist.addPattern(&lavaGradient);
+    playlist.addPattern(&pulseGreen);
 
-    playlist->addPattern(&rainbow);
-    playlist->addPattern(&pulseGold);
+    playlist.addPattern(&rainbow);
+    playlist.addPattern(&pulseGold);
 }

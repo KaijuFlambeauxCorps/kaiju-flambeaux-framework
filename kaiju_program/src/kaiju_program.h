@@ -4,8 +4,8 @@
 // - extern variable definitions
 // In the appropriate section
 
-#ifndef _KAIJU_PROGRAM_H_
-#define _KAIJU_PROGRAM_H_
+#pragma once
+
 #include "Arduino.h"
 #include "cplusplus.h"
 //add your includes for the project here
@@ -24,7 +24,5 @@ extern "C"
 #endif
 
 //add your function definitions for the project here
-void addPatternsToPlaylist(Playlist* playlist);
+void addPatternsToPlaylist();
 
-//Do not add code below this line
-#endif /* _kaiju_2014_H_ */

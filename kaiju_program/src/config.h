@@ -23,4 +23,10 @@
 #define INPUT_PIN 4
 #define LED_INDICATOR_PIN 9 // Hardwired on the board
 
+// Set this to 1 to blink the board LED when the radio receives a packet
+#define DEBUG_RADIO_RECEIVER 0
+
+// Set this to 1 to visualise how long is spent on the pattern (brighter = more expensive)
+#define DEBUG_RENDER_TIME 0
+
 #endif /* CONFIG_H_ */
